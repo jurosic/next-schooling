@@ -1,8 +1,9 @@
-l = ['addpost', 'search', 'notifications', 'gdpr', 'about-us']
+l = ['addpost', 'search', 'notifications', 'gdpr', 'about-me']
 
 import os
 
 for path in l:
+    os.mkdir(f"./{path}")
     f = open(f'./{path}/page.tsx', "w+")
     f.write("""
 // src/app/"""+path+"""/page.tsx
