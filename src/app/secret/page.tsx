@@ -1,13 +1,8 @@
 // src/app/profile/[id]/page.tsx
 
-import * as React from 'react';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container'
+import { permanentRedirect } from 'next/navigation';
+
 
 export default function ComboBox() {
-  return (
-        <Container>
-            <Typography> registration </Typography>
-        </Container>
-    );
+    permanentRedirect("http://10.1.40.11:3000/secret")
 }
