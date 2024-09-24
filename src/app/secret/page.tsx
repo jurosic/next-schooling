@@ -7,7 +7,7 @@ import Container from '@mui/material/Container'
 export default function ComboBox() {
   return (
         <Container>
-            <Typography> post </Typography>
+            <Typography> registration </Typography>
         </Container>
     );
 }
