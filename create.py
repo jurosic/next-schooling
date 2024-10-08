@@ -37,7 +37,7 @@ def recurse_labelfiles(path, depth):
 
             file_obj = open(path+"/"+file, "r").read()
 
-            if file[:2] == "//":
+            if "//" in file_obj[:5]:
                 print("Alr got comment")
             else:
                 file_obj = f"//{path+"/"+file}\n" + file_obj
