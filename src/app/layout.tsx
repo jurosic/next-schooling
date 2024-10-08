@@ -17,8 +17,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
+        <BarováNavigácia></BarováNavigácia>
       </body>
-      <BarováNavigácia></BarováNavigácia>
     </html>
   );
 }
