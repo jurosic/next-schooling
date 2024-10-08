@@ -16,8 +16,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
-        <BarováNavigácia></BarováNavigácia>
+        <div style={{minHeight: "90vh", display: "flex", flexDirection: "column"}}>
+          <main style={{flexGrow: 1}}>
+            {children}
+          </main>
+        </div>
+      <BarováNavigácia></BarováNavigácia>
       </body>
     </html>
   );

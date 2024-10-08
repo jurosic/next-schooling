@@ -35,14 +35,14 @@ def recurse_labelfiles(path, depth):
         if file.endswith(".tsx"):
             print("tsx FILE")
 
-            file = open(path+"/"+file, "r").read()
+            file_obj = open(path+"/"+file, "r").read()
 
             if file[:2] == "//":
                 print("Alr got comment")
             else:
-                file = f"//{path+"/"+file}\n" + file
+                file_obj = f"//{path+"/"+file}\n" + file_obj
 
-                print(file)
-
+                with open(path+'/'+file, 'w+') as f:
+                    f.write(file_obj)
 
 recurse_labelfiles(".", 0)
