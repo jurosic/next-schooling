@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
@@ -6,7 +8,7 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-export default function SimpleBottomNavigation() {
+export default function BarováNavigácia() {
   const [value, setValue] = React.useState(0);
 
   return (
@@ -24,4 +26,4 @@ export default function SimpleBottomNavigation() {
       </BottomNavigation>
     </Box>
   );
-}x
+}
