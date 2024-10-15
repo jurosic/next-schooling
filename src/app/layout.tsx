@@ -22,7 +22,9 @@ export default function RootLayout({
             {children}
           </main>
         </div>
-      <BarováNavigácia></BarováNavigácia>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <BarováNavigácia></BarováNavigácia>
+        </div>
       </body>
     </html>
   );
