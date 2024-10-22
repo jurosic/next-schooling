@@ -12,7 +12,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import RegisterIcon from '@mui/icons-material/PersonAdd';
 
 export default function BarováNavigácia() {
-  const [value, setValue] = React.useState(0);
+  const setValue = React.useState(0)[1];
 
   const getValue = () => {
     switch (window.location.pathname) {
