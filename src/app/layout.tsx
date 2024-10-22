@@ -1,12 +1,13 @@
-//./src/app/layout.tsx
-import type { Metadata } from "next";
-import "./globals.css";
+// src/app/layout.tsx
 
-import BarováNavigácia from "@/components/NavBar"
+import { Metadata } from "next";
+import "./globals.css";
+import Navbar from "@/components/NavBar";
+import AuthProvider from "../components/AuthProvider";
 
 export const metadata: Metadata = {
   title: "HappyJoy",
-  description: "Made by Juraj Janosik",
+  description: "Skibidi",
 };
 
 export default function RootLayout({
@@ -15,16 +16,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="sk">
       <body>
-        <div style={{minHeight: "90vh", display: "flex", flexDirection: "column"}}>
-          <main style={{flexGrow: 1}}>
-            {children}
-          </main>
-        </div>
-        <div style={{display: 'flex', justifyContent: 'center'}}>
-          <BarováNavigácia></BarováNavigácia>
-        </div>
+        <AuthProvider>
+          <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+            <main style={{ flexGrow: 1 }}>
+              {children}
+            </main>
+          </div>
+          <Navbar /> 
+        </AuthProvider>
       </body>
     </html>
   );
