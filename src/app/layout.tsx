@@ -1,5 +1,3 @@
-// src/app/layout.tsx
-
 import { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/NavBar";
@@ -23,8 +21,10 @@ export default function RootLayout({
             <main style={{ flexGrow: 1 }}>
               {children}
             </main>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Navbar />
+            </div>
           </div>
-          <Navbar /> 
         </AuthProvider>
       </body>
     </html>

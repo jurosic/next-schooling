@@ -13,10 +13,23 @@ export const authOptions: NextAuthOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/auth/prihlasenie',
-    signOut: '/auth/odhlasenie',
+    signIn: '/auth/login',
+    signOut: '/auth/logout',
   },
   callbacks: {
+    async jwt({ token, account }: { token: any; account: any }) {
+      if (account?.accessToken) {
+        token.accessToken = account.accessToken;
+      }
+      return token;
+    },
+
+    async session({ session, user }: { session: any; user: any }) {
+      if (user?.accessToken) {
+        session.accessToken = user.accessToken;
+      }
+      return session;
+    },
     async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
       // Redirect to home page after sign-in
       return baseUrl || url; // baseUrl is automatically set from NEXTAUTH_URL in .env

@@ -1,15 +1,12 @@
-// src/app/page.tsx
+// app/page.tsx
 
-import Typography from "@mui/material/Typography"
+import UserProfile from '@/components/UserProfile';
 
-
-export const metadata = { title: "Home" }
-
-export default function Home(){
-  return(
-      
-      <Typography>
-        Home Page
-      </Typography>
-    )
+export default function HomePage() {
+    return (
+        <div>
+            <h1>Welcome to the Home Page</h1>
+            <UserProfile />
+        </div>
+    );
 }

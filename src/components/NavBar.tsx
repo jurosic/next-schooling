@@ -1,5 +1,4 @@
-//./src/components/NavBar.tsx
-"use client"
+"use client";
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -10,36 +9,59 @@ import HomeIcon from '@mui/icons-material/Home';
 import PlusIcon from '@mui/icons-material/PlusOne';
 import LoginIcon from '@mui/icons-material/Login';
 import RegisterIcon from '@mui/icons-material/PersonAdd';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Avatar from '@mui/material/Avatar';
+import { useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 
 export default function BarováNavigácia() {
-  const setValue = React.useState(0)[1];
+  const handleLogout = () => {
+    signOut({ callbackUrl: '/' }); // Redirect to login page after logout
+  };
+
+  
+  const [value, setValue] = React.useState(0);
+  
+  const { data: session } = useSession();
+  const isLoggedIn = !!session;
+  console.log(session?.user?.image || '');
 
   const getValue = () => {
     switch (window.location.pathname) {
       case "/": return 0;
       case "/post": return 1;
-      case "/auth/register": return 2;
       case "/auth/login": return 3;
+      case "/auth/logout": return 3;
       default: return 0;
     }
   }
 
-  console.log(getValue());
+  React.useEffect(() => {
+    setValue(getValue());
+  }, []);
 
   return (
     <Box sx={{ width: 500 }}>
       <BottomNavigation
         showLabels
-        value={getValue()}
+        value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
       >
-      <BottomNavigationAction label="Domov" icon={<HomeIcon />} onClick={() => { window.location.href = "/" }} />
-      <BottomNavigationAction label="Pridať" icon={<PlusIcon />} onClick={() => { window.location.href = "/post"; }} />
-      <BottomNavigationAction label="Registrácia" icon={<RegisterIcon />} onClick={() => { window.location.href = "/auth/register"; }} />
-      <BottomNavigationAction label="Prihlásenie" icon={<LoginIcon />} onClick={() => { window.location.href = "/auth/login"; }} />
-    </BottomNavigation>
+        <BottomNavigationAction label="Home" icon={<HomeIcon />} href="/" />
+        <BottomNavigationAction label="Post" icon={<PlusIcon />} href="/post" />
+        {!isLoggedIn ? (
+            <BottomNavigationAction label="Login" icon={<LoginIcon />} href="/auth/login" />
+        ) : (
+            <BottomNavigationAction label="Logout" icon={<LogoutIcon />} onClick={handleLogout} />
+          )}
+        {!isLoggedIn ? (
+          <></>
+        ) : (
+          <Avatar alt="User Avatar" src={session?.user?.image || ''} />
+        )}
+      </BottomNavigation>
     </Box>
   );
 }
