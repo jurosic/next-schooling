@@ -13,13 +13,14 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Avatar from '@mui/material/Avatar';
 import { useSession } from 'next-auth/react';
 import { signOut } from 'next-auth/react';
+import { ThemeProvider } from '@/components/ThemeContext';
+import '@/styles/themes.css'; // Ensure this import is present
 
 export default function BarováNavigácia() {
   const handleLogout = () => {
     signOut({ callbackUrl: '/' }); // Redirect to login page after logout
   };
 
-  
   const [value, setValue] = React.useState(0);
   
   const { data: session } = useSession();
@@ -41,27 +42,30 @@ export default function BarováNavigácia() {
   }, []);
 
   return (
-    <Box sx={{ width: 500 }}>
-      <BottomNavigation
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-      >
-        <BottomNavigationAction label="Home" icon={<HomeIcon />} href="/" />
-        <BottomNavigationAction label="Post" icon={<PlusIcon />} href="/post" />
-        {!isLoggedIn ? (
-            <BottomNavigationAction label="Login" icon={<LoginIcon />} href="/auth/login" />
-        ) : (
-            <BottomNavigationAction label="Logout" icon={<LogoutIcon />} onClick={handleLogout} />
+    <ThemeProvider>
+      <Box sx={{ width: 500, backgroundColor: 'var(--background-color)', color: 'var(--text-color)' }}>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+          sx={{ backgroundColor: 'var(--background-color)', color: 'var(--text-color)' }}
+        >
+          <BottomNavigationAction label="Home" icon={<HomeIcon />} href="/" />
+          <BottomNavigationAction label="Post" icon={<PlusIcon />} href="/post" />
+          {!isLoggedIn ? (
+              <BottomNavigationAction label="Login" icon={<LoginIcon />} href="/auth/login" />
+          ) : (
+              <BottomNavigationAction label="Logout" icon={<LogoutIcon />} onClick={handleLogout} />
+            )}
+          {!isLoggedIn ? (
+            <></>
+          ) : (
+            <Avatar alt="User Avatar" src={session?.user?.image || ''} />
           )}
-        {!isLoggedIn ? (
-          <></>
-        ) : (
-          <Avatar alt="User Avatar" src={session?.user?.image || ''} />
-        )}
-      </BottomNavigation>
-    </Box>
+        </BottomNavigation>
+      </Box>
+    </ThemeProvider>
   );
 }
